@@ -2,7 +2,7 @@
 
 A private streaming server for your own movie collection. Run it on a laptop, and your family can watch from their phones, at home or away, with accounts, adaptive video quality and "continue watching".
 
-![tests](https://github.com/jeevan-kumar272/homestream/actions/workflows/tests.yml/badge.svg)
+![tests](https://github.com/jeevan-kumar272/homestream/actions/workflows/test.yml/badge.svg)
 
 
 
