@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HomeStream</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="/">HomeStream</a>
+    <div id="header-tools" class="header-tools" hidden>
+      <label class="search">
+        <span class="visually-hidden">Search movies</span>
+        <input id="search" type="search" placeholder="Search movies" autocomplete="off">
+      </label>
+      <button id="account-button" class="chip" type="button"></button>
+    </div>
+  </header>
+
+  <!-- Shown when nobody is signed in -->
+  <section id="auth-view" class="auth" hidden>
+    <form id="auth-form" class="auth-card" novalidate>
+      <h1 id="auth-title"></h1>
+      <p id="auth-intro" class="muted"></p>
+      <label class="field">
+        <span>Username</span>
+        <input id="auth-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input id="auth-password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <p id="auth-error" class="form-error" role="alert" hidden></p>
+      <button id="auth-submit" class="button" type="submit"></button>
+    </form>
+  </section>
+
+  <!-- Shown when someone is signed in -->
+  <main id="library-view" hidden>
+    <div class="library-head">
+      <h1 id="library-title">Your movies</h1>
+      <p id="library-count" class="muted"></p>
+    </div>
+
+    <section id="continue" class="shelf-section" aria-labelledby="continue-title" hidden>
+      <h2 id="continue-title" class="section-title">Continue watching</h2>
+      <div id="continue-grid" class="shelf"></div>
+    </section>
+
+    <h2 id="all-title" class="section-title" hidden>All movies</h2>
+    <p id="status" class="status" hidden></p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <dialog id="player" class="player" aria-labelledby="player-title">
+    <div class="player-bar">
+      <h2 id="player-title"></h2>
+      <div class="player-controls">
+        <label class="quality" id="quality-wrap" hidden>
+          <span class="visually-hidden">Video quality</span>
+          <select id="quality"></select>
+        </label>
+        <button id="player-close" class="close" type="button">Close</button>
+      </div>
+    </div>
+    <video id="video" controls playsinline preload="metadata"></video>
+    <p id="player-error" class="player-error" hidden>
+      Your browser can't play this file format. Convert it to MP4 to watch it here.
+    </p>
+  </dialog>
+
+  <dialog id="account" class="panel" aria-labelledby="account-title">
+    <div class="panel-bar">
+      <h2 id="account-title">Account</h2>
+      <button id="account-close" class="button secondary" type="button">Close</button>
+    </div>
+
+    <div class="panel-body">
+      <p class="signed-in">Signed in as <strong id="account-name"></strong></p>
+
+      <form id="password-form" class="stack">
+        <h3>Change password</h3>
+        <label class="field">
+          <span>Current password</span>
+          <input id="current-password" type="password" autocomplete="current-password" required>
+        </label>
+        <label class="field">
+          <span>New password</span>
+          <input id="new-password" type="password" autocomplete="new-password" required>
+        </label>
+        <p id="password-message" role="status" hidden></p>
+        <button class="button" type="submit">Change password</button>
+      </form>
+
+      <section id="admin-section" class="stack" hidden>
+        <h3>Family accounts</h3>
+        <ul id="user-list" class="user-list"></ul>
+
+        <form id="user-form" class="stack">
+          <label class="field">
+            <span>New username</span>
+            <input id="new-username" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+          </label>
+          <label class="field">
+            <span>Their starting password</span>
+            <input id="new-user-password" type="text" autocomplete="off" required>
+          </label>
+          <p id="user-message" role="status" hidden></p>
+          <button class="button" type="submit">Add account</button>
+        </form>
+      </section>
+
+      <button id="signout" class="button secondary" type="button">Sign out</button>
+    </div>
+  </dialog>
+
+  <script src="/static/hls.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

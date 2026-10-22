@@ -1,0 +1,475 @@
+/* Colors: a late night living room, plum walls and a warm lamp */
+:root {
+  color-scheme: light;
+  --bg: #f6f1f4;
+  --surface: #ffffff;
+  --text: #2a1c30;
+  --muted: #6e5a6a;
+  --accent: #9a5a12;
+  --line: #e3d8df;
+  --poster-text: #fff8f0;
+  --on-accent: #ffffff;
+  --danger: #a3262a;
+  --ok: #2d6a35;
+  --font: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #1c1220;
+    --surface: #2a1c30;
+    --text: #f2e9ee;
+    --muted: #b9a6b5;
+    --accent: #f0b84a;
+    --line: #3a2a40;
+    --on-accent: #1c1220;
+    --danger: #ff9a9a;
+    --ok: #8fd694;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* Without this, any element given a display style would ignore the hidden attribute */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.muted { color: var(--muted); }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.25rem clamp(1rem, 4vw, 3rem);
+}
+
+.wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.search input {
+  width: min(22rem, 70vw);
+  padding: 0.6rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+/* Library */
+main {
+  padding: 0 clamp(1rem, 4vw, 3rem) 4rem;
+}
+
+.library-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 1.5rem 0 1.75rem;
+}
+
+.library-head h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.library-head p { margin: 0; }
+
+.status {
+  max-width: 36rem;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem 1.25rem;
+  align-items: start;
+}
+
+/* Movie card: a button so it works with keyboard and screen readers */
+.card {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* The poster: a typographic film poster in a color made from the movie ID */
+.poster {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.9rem;
+  border-radius: 6px;
+  background: hsl(var(--hue) 42% 30%);
+  color: var(--poster-text);
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-year {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.9rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.poster-title {
+  font-size: 9cqi;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.poster-title.long { font-size: 7cqi; }
+
+.card:hover .poster,
+.card:focus-visible .poster {
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+.card-title {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.card-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Player */
+.player {
+  width: min(1100px, 96vw);
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #000;
+  color: #f2e9ee;
+}
+
+.player::backdrop {
+  background: rgb(10 5 12 / 0.85);
+}
+
+.player-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.player-bar h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quality select {
+  padding: 0.4rem 0.6rem;
+  font: inherit;
+  color: inherit;
+  background: #1c1220;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.close {
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.player video {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  background: #000;
+}
+
+.player-error {
+  margin: 0;
+  padding: 1rem;
+  color: #f0b84a;
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Header tools */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 0.55rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* Sign in / first account screen */
+.auth {
+  display: grid;
+  justify-items: center;
+  padding: clamp(2rem, 10vh, 6rem) 1rem;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(26rem, 100%);
+}
+
+.auth-card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.auth-card p { margin: 0; }
+
+/* Forms */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.field input {
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.button {
+  padding: 0.7rem 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.button:disabled { opacity: 0.6; cursor: progress; }
+
+.button.secondary {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.form-error, .form-ok { margin: 0; font-weight: 600; }
+.form-error { color: var(--danger); }
+.form-ok { color: var(--ok); }
+
+/* Account panel */
+.panel {
+  width: min(32rem, 94vw);
+  max-height: 90vh;
+  padding: 0;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.panel::backdrop { background: rgb(10 5 12 / 0.7); }
+
+.panel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  position: sticky;   /* the title and Close button stay visible while the panel scrolls */
+  top: 0;
+  background: var(--bg);
+}
+
+.panel-bar h2 { margin: 0; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
+
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 1.25rem;
+}
+
+.panel h3 { margin: 0; font-size: 1.05rem; }
+.signed-in { margin: 0; }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.stack > p { margin: 0; }
+.panel .button { align-self: flex-start; }
+
+.user-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.user-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.link-button {
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+  color: var(--danger);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Continue watching */
+.section-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.shelf-section { margin-bottom: 2.5rem; }
+
+#all-title { margin-top: 0.5rem; }
+
+.shelf {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 260px);
+  gap: 1.25rem;
+  align-items: start;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  scroll-snap-type: x proximity;
+}
+
+.shelf .card { scroll-snap-align: start; }
+
+/* The thin bar along the bottom of a picture: how much has been watched */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: rgb(0 0 0 / 0.55);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.card-progress {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}

@@ -1,0 +1,4 @@
+# What HomeStream needs to run. Install with:  pip install -r requirements.txt
+# Tested with Python 3.12, FastAPI 0.156, Uvicorn 0.54.
+fastapi>=0.115
+uvicorn>=0.30

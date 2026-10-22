@@ -1,0 +1,30 @@
+# ---- Your private data. Never commit these. ----
+# The database holds your accounts (password hashes) and watch history
+homestream.db
+homestream.db-journal
+homestream.db-wal
+homestream.db-shm
+
+# Your movies and everything made from them (converted videos, thumbnails).
+# The .gitkeep files keep the empty folders in the repository.
+media/movies/*
+media/hls/*
+media/thumbs/*
+!media/movies/.gitkeep
+!media/hls/.gitkeep
+!media/thumbs/.gitkeep
+
+# ---- Python ----
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ---- Secrets, editors and operating system files ----
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
